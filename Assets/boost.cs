@@ -9,11 +9,13 @@ public class boost : MonoBehaviour
 {
 
     Rigidbody rigidbody;
+    AudioSource china;
 
     // Start is called before the first frame update
     void Start()
     {
         rigidbody = GetComponent<Rigidbody>();
+        china = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -25,17 +27,25 @@ public class boost : MonoBehaviour
     void ProcessInput()
     {
         if (Input.GetKey(KeyCode.Space))
-        {
+        {            
             rigidbody.AddRelativeForce(Vector3.up);
+            if (!china.isPlaying)
+            {
+                china.Play();
+            }
+
+        } else
+        {
+            china.Stop();
         }
 
         if (Input.GetKey(KeyCode.A))
         {
-            print("Rotate Left");
+            transform.Rotate(Vector3.forward);
         }
         else if (Input.GetKey(KeyCode.D))
         {
-            print("rotating right");
+            transform.Rotate(-Vector3.forward);
         }
 
 
